@@ -69,9 +69,9 @@ public class Exam_OddNumber_EvenNumber_Game {
     } // end displayResult()
     
     /**
+     * dispaly() 메소드로부터 호출 받아서
      * 획득한 점수에 따라서 상품에 대한 결과를 출력하는 메소드
-     * @param winConut // 총 이긴 횟수 
-     * dispaly() 메소드로부터 호출 받아서 
+     * @param winConut // 총 이긴 횟수
      */
     private static void prizeResult(int winConut)
     {
