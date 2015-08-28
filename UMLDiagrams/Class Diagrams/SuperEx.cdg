@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="SuperEx">
+  <ClassDiagramComponents>
+    <Class name="Ex1_A" package="" visibility="public" xPosition="88.0" yPosition="65.0">
+      <Fields>
+        <Field name="num" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Ex2_B" package="" visibility="public" xPosition="89.0" yPosition="340.0">
+      <Fields>
+        <Field name="num2" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <IsRelation name="is" source="Ex2_B" target="Ex1_A"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

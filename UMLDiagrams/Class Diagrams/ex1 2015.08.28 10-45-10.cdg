@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="ex1">
+  <ClassDiagramComponents>
+    <Class name="Ex1_Imple" package="ex1" visibility="public" xPosition="21.0" yPosition="330.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="test" returnType="void" visibility="public"/>
+        <Method name="test2" returnType="void" visibility="public"/>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Ex2MyWindow" package="ex1" visibility="public" xPosition="354.0" yPosition="310.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="paint" returnType="void" visibility="public"/>
+        <Method name="draw" returnType="void" visibility="public"/>
+        <Method name="print" returnType="void" visibility="public"/>
+        <Method name="myHiddenPay" returnType="void" visibility="public"/>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="Ex1_Inter" package="ex1" visibility="public" xPosition="38.0" yPosition="20.0">
+      <Methods>
+        <Method name="test" returnType="void" visibility="public" isAbstract="true"/>
+        <Method name="test2" returnType="void" visibility="public"/>
+      </Methods>
+    </Interface>
+    <Interface name="Ex2MyColor" package="ex1" visibility="public" xPosition="274.0" yPosition="6.0">
+      <Methods>
+        <Method name="paint" returnType="void" visibility="public" isAbstract="true"/>
+      </Methods>
+    </Interface>
+    <Interface name="Ex2_MyDraw" package="ex1" visibility="public" xPosition="487.0" yPosition="6.0">
+      <Methods>
+        <Method name="draw" returnType="void" visibility="public" isAbstract="true"/>
+      </Methods>
+    </Interface>
+    <Interface name="Ex2_MyInter" package="ex1" visibility="public" xPosition="371.0" yPosition="171.0">
+      <Methods>
+        <Method name="print" returnType="void" visibility="public"/>
+      </Methods>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="ex1.Ex1_Imple" target="ex1.Ex1_Inter"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="ex1.Ex2MyWindow" target="ex1.Ex2_MyInter"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
