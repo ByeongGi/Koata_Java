@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- struts.i18n.encoding=UTF-8  언어 지원 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<!-- namespace 경로 /액션의이름:name URL= /actionname-->
+	<package name="default" namespace="/" extends="struts-default">
+		<action name="hello" class="action.HelloAction">
+			<result name="success">/hello.jsp</result>
+		</action>
+		<action name="today" class="action.TodayAction">
+			<result name="success">/today.jsp</result>
+		</action>
+		<action name="form1">
+			<result>/form.jsp</result>
+		</action>
+		<!-- redirectAction 속성 지정 후에 다른 ation 호출 -->
+		<action name="formres" class="action.FormResAction">
+			<result type="redirectAction">
+				<param name="actionName">list</param>
+			</result>
+		</action>
+		<action name="list" class="action.ListAction" >
+			<result>/list.jsp</result>
+		</action>
+		
+		<action name="listDetail" class="action.ListOneAction" >
+			<result>/listDetail.jsp</result>
+		</action>
+		
+		
+		
+		
+		<action name="bform">
+			<result>/boardForm.jsp</result>
+		</action>
+		<action name="uploadres" class="action.UploadAction">
+			<result type="redirectAction">
+				<param name="actionName">boardlist2</param>
+			</result>
+		</action>
+		<action name="boardlist" class="action.BoardListAction">
+			<result>/Boardlist.jsp</result>
+		</action>
+		
+		<action name="boardlist2" class="action.BoardListAction2">
+			<result>/Boardlist.jsp</result>
+		</action>
+		
+		<action name="boardDetail" class="action.BoardListOneAction">
+			<result>/boardDetail.jsp</result>
+		</action>
+		
+		
+	</package>
+</struts>

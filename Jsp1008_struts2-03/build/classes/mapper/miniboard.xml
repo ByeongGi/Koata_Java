@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<!-- 
+	parameterType alias : mbvo
+	NUM	NUMBER(10,0)
+	SUB	VARCHAR2(100 BYTE)
+	WRITER	VARCHAR2(34 BYTE)
+	CONT	CLOB
+	REIP	VARCHAR2(40 BYTE)
+	BDATE	DATE 
+	-->
+<mapper namespace="miniboard">
+	<insert id="add" parameterType="mbvo" >
+		insert into miniboard
+		values(miniboard_seq.nextVal,
+		#{sub},#{writer},#{cont},
+		#{reip},sysdate)
+	</insert>
+	<select id="list" resultType="mbvo">
+		select num, sub, writer, cont, to_char(bdate, 'yyyy-mm-dd') as bdate, reip 
+		from miniboard order by 1
+	</select>
+	
+	<select id="detail" resultType="mbvo" parameterType="int">
+		select num, sub, writer, cont, to_char(bdate, 'yyyy-mm-dd') as bdate, reip 
+		from miniboard where num = #{num} order by 1
+	</select>
+	
+</mapper>
+
+
+
+

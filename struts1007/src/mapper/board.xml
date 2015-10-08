@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<!-- 
+	
+	board Table 
+	NO	NUMBER(8,0)
+	TITLE	VARCHAR2(100 BYTE)
+	WRITER	VARCHAR2(45 BYTE)
+	IMG	VARCHAR2(50 BYTE)
+	CONTENT	VARCHAR2(400 BYTE)
+	HIT	NUMBER(5,0)
+	GROUPNO	NUMBER(3,0)
+	REGDATE	DATE
+	
+	-->
+
+<mapper namespace="board">
+
+	<insert id="add" parameterType="bvo" >
+		insert into board
+		values( board_seq.nextVal,
+		#{title}, #{writer}, #{img}, #{content}, 0
+		#{groupno} , sysdate )
+	</insert>
+	
+	<select id="list" resultType="bvo">
+		select no, title, writer , img , content, hit , groupno , 
+		to_char(regdate, 'yyyy-mm-dd') as regdate
+		from board order by 1
+	</select>
+	
+	<select id="detail" resultType="bvo" parameterType="int">
+		select no, title, writer, img , content, hit , groupno , 
+		to_char(regdate, 'yyyy-mm-dd') as regdate
+		from board where num = #{num} order by 1
+	</select>
+	
+</mapper>
+
+
+

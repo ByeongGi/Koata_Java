@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- struts.i18n.encoding=UTF-8 언어 지원 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<!-- namespace 경로 /액션의이름:name URL= /actionname -->
+	<package name="default" namespace="/" extends="struts-default">
+		<!-- documentRoot 경로를 index로 요청하라는 뜻 -->
+		<default-action-ref name="index"></default-action-ref>
+
+		<action name="hello" class="action.HelloAction">
+			<result name="success">/hello.jsp</result>
+		</action>
+		<action name="today" class="action.TodayAction">
+			<result name="success">/today.jsp</result>
+		</action>
+		<action name="form1">
+			<result>/form.jsp</result>
+		</action>
+		<!-- redirectAction 속성 지정 후에 다른 ation 호출 -->
+		<action name="formres" class="action.FormResAction">
+			<result type="redirectAction">
+				<param name="actionName">list</param>
+			</result>
+		</action>
+		<action name="list" class="action.ListAction">
+			<result>/list.jsp</result>
+		</action>
+
+		<action name="listDetail" class="action.ListOneAction">
+			<result>/listDetail.jsp</result>
+		</action>
+
+
+
+
+		<action name="bform">
+			<result>/boardForm.jsp</result>
+		</action>
+		<action name="uploadres" class="action.UploadAction">
+			<result type="redirectAction">
+				<param name="actionName">boardlist2</param>
+			</result>
+		</action>
+		<action name="boardlist" class="action.BoardListAction">
+			<result>/Boardlist.jsp</result>
+		</action>
+
+		<!-- 게시판 갈 때에 login 하면 페이지 보이게 하기 -->
+		<action name="boardlist2" class="action.BoardListAction2">
+			<result name="login" type="redirectAction">
+				<param name="actionName">${url}</param>
+			</result>
+			<result name="success">/Boardlist.jsp</result>
+		</action>
+
+
+		<!-- -->
+		<action name="boardDetail" class="action.BoardListOneAction">
+			<result name="login" type="redirectAction">
+				<param name="actionName">${url}</param>
+			</result>
+			<result>/boardDetail.jsp</result>
+		</action>
+
+		<!-- login -->
+		<action name="loginForm">
+			<result>/login.jsp</result>
+		</action>
+
+		<action name="loginok" class="action.LoginAction">
+			<result name="INPUT">/loginErr.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">${url}</param>
+			</result>
+		</action>
+
+
+		<!-- 로그아웃 맵핑 method logout 지정 -->
+		<action name="logout" class="action.LoginAction" method="logout">
+			<result type="redirectAction">
+				<param name="actionName">index</param>
+			</result>
+		</action>
+
+
+
+		<action name="index">
+			<result>/index.jsp</result>
+		</action>
+		<!-- -->
+
+
+
+		<!-- 파일 다운로드 -->
+		<!-- MineTpye : binary/octet-stream 바이트 바이너리로 ! 받아라 ! 브라우저야 ! -->
+		<action name="fileDown" class="action.FileDownAction">
+			<result type="stream">
+				<param name="contentType">
+					binary/octet-stream
+				</param>
+				<param name="contentLength">
+					${contentLength}
+				</param>
+				<param name="contentDisposition">
+					${contentDisposition}
+				</param>
+				<param name="inputName">input</param>
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+
+
+
+
+
+	</package>
+</struts>

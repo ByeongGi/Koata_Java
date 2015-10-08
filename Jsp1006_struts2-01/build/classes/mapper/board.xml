@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- private int no, hit, groupno;
+private String title, writer, img, content, regdate; 
+
+NO
+TITLE
+WRITER
+IMG
+CONTENT
+HIT
+GROUPNO
+REGDATE
+
+-->
+<mapper namespace="board">
+
+	<insert id="add" parameterType="bvo" >
+		insert into board (NO,TITLE,WRITER,IMG,CONTENT,HIT,GROUPNO,REGDATE)
+		values(board_seq.nextVal,#{title},#{writer},#{img},#{content},0,#{groupno},sysdate)
+	</insert>
+	
+	<select id="list" resultType="bvo">
+		select no, title, writer , img , content, hit , groupno , 
+		to_char(regdate, 'yyyy-mm-dd') as regdate
+		from board order by 1
+	</select>
+	
+	<select id="detail" resultType="bvo" parameterType="int">
+		select no, title, writer, img , content, hit , groupno , 
+		to_char(regdate, 'yyyy-mm-dd') as regdate
+		from board where no = #{no} order by 1
+	</select>
+	
+	<select id="list2" resultType="bvo" parameterType="pvo">
+		SELECT * FROM (SELECT ROWNUM r_num, a.*  
+         FROM (SELECT * FROM BOARD ORDER BY NO desc
+         ) a
+		) WHERE r_num  BETWEEN #{start} AND #{end}
+	</select>
+	<select id="tatal" resultType="int" parameterType="pvo">
+		select count(*) cnt from BOARD
+	</select>
+	<select id="hit" parameterType="int">
+		UPDATE BOARD SET HIT = 
+		(SELECT HIT FROM BOARD WHERE NO = #{no})+1 
+		WHERE NO = #{no}
+	</select>
+	
+</mapper>
+	

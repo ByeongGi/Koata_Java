@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    NUM	NUMBER
+	ID	VARCHAR2(20 BYTE)
+	PWD	VARCHAR2(20 BYTE)
+	NAME	VARCHAR2(45 BYTE)
+	POST	CHAR(10 BYTE)
+	ROADADDRESS	VARCHAR2(300 BYTE)
+	JIBUNADDRESS	VARCHAR2(300 BYTE)
+	EDATE	DATE 
+--> 
+<mapper namespace="mem">
+	<insert id="add" parameterType="mvo" >
+		insert into mem 
+		values(
+		mem_seq.nextVal , #{id} , #{pwd}, #{name} ,
+		#{post} , #{roadAddress} , #{jibunaddress} , 
+		sysdate
+		)
+	</insert>
+	<select id="idchk" parameterType="String" resultType="int" >
+		select count(*) cnt from mem where id = #{id}
+	</select>
+	
+	<select id="memAll" resultType="mvo">
+		select * from mem order by 1 desc
+	</select>
+	
+	
+	<delete id="memDel" parameterType="int">
+		delete from mem where num = #{num}
+	</delete>
+	
+	<update id="memUp" parameterType="mvo">
+		update mem set 
+		ID = #{id} ,
+		PWD = #{pwd} ,
+		NAME =  #{name} ,
+		POST = #{post} ,
+		ROADADDRESS =  #{roadAddress} ,
+		JIBUNADDRESS =  #{jibunaddress} 
+		where num = #{num}
+	</update>
+	
+	<select id="selectOne" parameterType="int" resultType="mvo">
+		select * from mem where num = #{num}
+	</select>
+	
+	<select id="searchMem" parameterType="String" resultType="mvo">
+		select * from mem where name = #{name}
+	</select>
+	
+	<select id="login" parameterType="Map" resultType="int">
+		select count(*) cnt from mem where id = #{id} and pwd = #{pwd}
+	</select>
+	
+</mapper>
