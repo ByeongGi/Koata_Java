@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- struts.i18n.encoding=UTF-8 언어 지원 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<!-- namespace 경로 /액션의이름:name URL= /actionname -->
+	<package name="default" namespace="/" extends="struts-default">
+		<!-- documentRoot 경로를 index로 요청하라는 뜻 -->
+		<default-action-ref name="index"></default-action-ref>
+
+		<action name="index">
+			<result>/index.jsp</result>
+		</action>
+		<action name="boardlist" class="action.BoardListAction">
+			<result>/Boardlist.jsp</result>
+		</action>
+
+		<action name="writer">
+			<result>/writer.jsp</result>
+		</action>
+		<action name="boardinsert" class="action.Board2InsertAction">
+			<result type="redirectAction">
+				<param name="actionName">boardlist2</param>
+			</result>
+		</action>
+		<action name="boardlist2" class="action.Board2ListAction">
+			<result>/Boardlist2.jsp</result>
+		</action>
+
+
+		<action name="view" class="action.Board2View">
+			<result>/view.jsp</result>
+		</action>
+
+
+		<action name="commIn" class="action.CommInAction">
+			<result type="redirectAction">
+				<!-- Parameter 다는법 -->
+				<param name="actionName">view</param>
+				<param name="no">${no}</param>
+			</result>
+		</action>
+
+
+		<!-- 답변글 폼에서 처리하기 위한 액션 -->
+		<action name="reply" class="action.ReplyAction">
+			<result>/reply.jsp</result>
+		</action>
+
+		<!-- 답변글 폼에서 처리하기 위한 액션 -->
+		<action name="reply_In" class="action.ReplyInsertAction">
+			<result type="chain">boardlist2</result>
+			<result name="failure">/failure.jsp</result>
+		</action>
+		
+		
+		<action name="chart" >
+			<result name="">/hi_chart.jsp</result>
+		</action>
+
+
+
+
+	</package>
+</struts>

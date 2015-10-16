@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- private int no, hit, groupno;
+private String title, writer, img, content, regdate; 
+
+NO
+TITLE
+WRITER
+IMG
+CONTENT
+HIT
+GROUPNO
+REGDATE
+
+-->
+<mapper namespace="board">
+
+	<insert id="add" parameterType="bvo" >
+		insert into board (NO,TITLE,WRITER,IMG,CONTENT,HIT,GROUPNO,REGDATE)
+		values(board_seq.nextVal,#{title},#{writer},#{img},#{content},0,#{groupno},sysdate)
+	</insert>
+	
+	<select id="list" resultType="bvo" parameterType="bvo">
+		select * from board 
+		<if test="searchType != null">
+			<where>
+				<choose>
+					<when test="searchType == 1">
+						title like '%' || #{searchValue} || '%'					
+					</when>
+					<when test="searchType == 2">
+						writer like '%' || #{searchValue} || '%'					
+					</when>
+					<when test="searchType == 3">
+						content like '%' || #{searchValue} || '%'					
+					</when>
+					<otherwise></otherwise>
+				</choose>
+			</where>
+		</if>
+		order by 1 desc
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>
+	

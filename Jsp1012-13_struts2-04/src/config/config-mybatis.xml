@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting value="LOG4J2" name="logImpl"/>
+	</settings>
+<!-- typeAliases 설정을 하면 VO 객체에 alias 줄수 있다. -->
+	<typeAliases>
+		
+		<typeAlias type="vo.BoardVo" alias="bvo" />
+		<typeAlias type="vo.Board2Vo" alias="board" />
+		<typeAlias type="vo.Bbs_CommmVo" alias="cvo" />
+	
+		
+	</typeAliases>
+	
+	<!-- JNDI 방식으로 설정을 읽는다. -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="JNDI">
+				<property name="data_source" value="java:comp/env/jdbc/myora" />
+			</dataSource>
+		</environment>
+	</environments>
+	
+	
+	<!-- Mapper.xml 들을 읽는다 -->
+	<mappers>
+		<mapper resource="mapper/board.xml" />
+		<mapper resource="mapper/board2.xml" />
+		
+	</mappers>
+</configuration>

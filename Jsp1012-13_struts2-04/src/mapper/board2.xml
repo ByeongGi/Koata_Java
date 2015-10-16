@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- private int no, hit, groupno;
+private String title, writer, img, content, regdate; 
+
+NO
+TITLE
+WRITER
+IMG
+CONTENT
+HIT
+GROUPNO
+REGDATE
+
+-->
+<mapper namespace="board2">
+	
+	<insert id="in_board" parameterType="board" >
+		insert into board2 values(board2_seq.nextVal,#{writer},
+		#{pwd},#{subject},#{content},#{reip},board_seq.nextVal,1,
+		#{lvl},sysdate)
+	</insert>
+	
+	<select id="gList" resultType="board">
+		select * from board2 order by ref desc, seq asc
+	</select>
+	
+	<select id="view_board" resultType="board" parameterType="int">
+		select * from board2 where no = #{no}
+	</select>
+	
+	<select id="replay_Insert" parameterType="board">
+		insert into board2 values(board2_seq.nextVal,#{writer},
+		#{pwd} ,#{subject} ,#{content} ,#{reip} ,#{ref} ,#{seq} ,
+		#{lvl} ,sysdate)
+	</select>
+	<!-- PCDATA -> XML 임  <![CDATA[ 키워드는 문자열로 만들겠다 -->
+	<update id="replay_Update" parameterType="board">
+	<![CDATA[
+	update board2 set seq = seq +1 where seq >= #{seq} and ref = #{ref}
+	]]>
+	</update>
+	
+	<insert id="bbscomin" parameterType="cvo">
+		insert into bbs_comm values(bbs_comm_seq.nextVal,#{tcode},
+		#{comm},#{writer},#{pwd},#{reip},sysdate)
+	</insert>
+	
+	<select id="comL" parameterType="int" resultType="cvo">
+		select * from bbs_comm where tcode =#{no}
+		order by num desc
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>
+	
