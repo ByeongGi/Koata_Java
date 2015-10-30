@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="menu" class="exam.OrderImp"/>
+	<bean id="orderSystem" class="exam.OrderSystem">
+		<property name="menu" ref="menu"></property>
+	</bean>
+	<!-- 
+	The example shows an attribute in the p-namespace called email in the bean definition. 
+	This tells Spring to include a property declaration. As previously mentioned, 
+	the p-namespace does not have a schema definition,
+	so you can set the name of the attribute to the property name. 
+	
+	As you can see, this example includes not only a property value using the p-namespace, 
+	but also uses a special format to declare property references.
+	Whereas the first bean definition uses <property
+	name="spouse" ref="jane"/> to create a reference from bean john to bean jane, the second
+    bean definition uses p:spouse-ref="jane" as an attribute to do the exact same thing.
+    In this case spouse is the property name,
+    whereas the -ref part indicates that this is not a straight value but rather 
+    a reference to another bean
+	-->
+	
+	<!-- <bean id="orderSystem" class="exam.OrderSystem" p:menu-ref="menu"/> -->
+</beans>

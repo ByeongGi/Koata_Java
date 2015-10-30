@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 외부빈 가져오기 -->
+	<import resource="../ex1/ex1_cont.xml"/>
+	
+	<!-- Wrapper 클래스를 Bean으로 설정 해본것임 -->
+	<bean id="k" class="java.lang.Integer">
+		<constructor-arg value="15000"/>
+	</bean>
+	
+	<bean id="myMap" class="ex2.Ex2_Map">
+		<property name="maps" >
+			<map>
+				<entry key="서울" value="60000"></entry>
+				<entry key="광주" value-ref="k"></entry>
+				<entry key="중국" value="100000"></entry>
+			</map>
+		</property>
+	</bean>
+</beans>

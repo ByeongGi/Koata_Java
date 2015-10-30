@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+	
+	<!-- advice가 될수있게 된 객체 -->
+	<bean id="timeCheck" class="ex1.TimeCheck_AroundAdvice"/>
+	<bean id="nameReturn" class="ex1.NameReturnAdvice"/>
+	<bean id="afterThrowAdvice" class="ex1.AfterThrowAdvice"></bean>
+	
+	<!-- AspectJ 태그 : ProxyFactoryBean을 캡슐화 -->
+	<aop:config>
+		<aop:aspect id="time" ref="timeCheck">
+			<aop:pointcut expression="execution(* ex1.DaoImple.first())" id="firstP"/>
+			<aop:around method="checkTime" pointcut-ref="firstP"/>
+		</aop:aspect>
+		<aop:aspect id="after" ref="nameReturn">
+			<aop:pointcut expression="execution(* ex1.DaoImple.second())" id="secondP"/>
+			<aop:after-returning method="myReturnMethod" pointcut-ref="secondP" returning="ret"/>
+		</aop:aspect>
+		<aop:aspect id="afterThrow" ref="afterThrowAdvice">
+			<aop:pointcut expression="execution(* ex1.DaoImple.third())" id="thirdP"/>
+			<aop:after-throwing method="commThrow" pointcut-ref="thirdP" throwing="ew"/>
+		</aop:aspect>
+	</aop:config>
+	<bean id="dao" class="ex1.DaoImple" />
+	
+</beans>

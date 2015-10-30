@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+	<context:annotation-config/>
+	<bean id="msg" class="java.lang.String">
+		<constructor-arg><value>하이</value></constructor-arg>
+	</bean>
+	
+	<!-- Target 객체  -->
+	<bean id="auto" class="ex3.MyBeanImple" />
+	
+	<!-- AfterAdvice 객체 생성-->
+	<bean id="LogerAfterAdvice" class="ex3.MyAfterAdvice"/> 
+	
+	<!-- PointCut 객체 생성 -->
+	<bean id="LogerPointCut" class="org.springframework.aop.aspectj.AspectJExpressionPointcut">
+		<property name="expression" value="execution(* myGet*(..))"></property>
+	</bean>
+	
+	<!-- Advisor 객체 생성-->
+	<bean id="LoggerAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="advice" ref="LogerAfterAdvice"/>
+		<property name="pointcut" ref="LogerPointCut"/>
+	</bean>
+	
+	<!-- 연습문제 구간 -->
+	
+	<!-- Method_BeforeAdvice 객체 생성-->
+	<bean id="LogerBeforeAdvice" class="ex3.MyBeforeAdvice"/>
+	
+	
+	<!-- PointCut 객체 생성 -->
+	<bean id="LogerPointCut2" class="org.springframework.aop.aspectj.AspectJExpressionPointcut">
+		<property name="expression" value="execution(* myGet*(..))"></property>
+	</bean>
+	<!-- Advisor 객체 생성-->
+	<bean id="LoggerAdvisor2" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="advice" ref="LogerBeforeAdvice"/>
+		<property name="pointcut" ref="LogerPointCut2" />
+	</bean>
+	
+	<!-- 연습문제 구간 끝 -->
+	
+	
+	<!-- 프록시 팩토리 빈 
+		 target propeties에 DI 해주고
+		 interceptorNames 인 advisor(interceptor)들을 DI 해준다.
+		 interceptorNames들은 
+		 "interceptorNames" array must contain only Advice/Advisor bean names.
+		 advice/ advisor 이름들의 배열을 포함해야한다.
+		 
+		 
+	-->
+	<bean id="pfBean" 
+		class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="auto"/>
+		<property name="interceptorNames">
+			<array>
+			  <value>LoggerAdvisor</value>
+			  <value>LoggerAdvisor2</value>
+			</array>
+		</property>
+	</bean>
+	
+	
+	
+</beans>

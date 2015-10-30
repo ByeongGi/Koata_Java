@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- bean 객체를 등록  - Bean 생성과 관리를 모두 스프링 컨테이너에게 위임함 -->
+	<bean id="msg" class="ex1.Ex1_MessegeApp">
+		<property name="msg" value="안녕하세요!" />
+	</bean>
+	
+	<bean id="today" class="ex1.Exam1_Today">
+		<property name="today" value="오늘의 날짜는?" />
+	</bean>
+	
+</beans>

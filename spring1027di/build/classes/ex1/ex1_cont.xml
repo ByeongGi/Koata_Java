@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Bean 생성자 주입 -->
+	<!-- 생성자 오버로딩일 경우 Spring 은 기본적으로 String으로 호출한다. 그래서 Type을 지정하면 오버로딩된 생성자중 
+		지정한 자료형의 생성자를 호출한다. -->
+	<bean id="cont1" class="ex1.ex1_Const">
+		<constructor-arg value="10000" type="int" />
+	</bean>
+	<bean id="cont2" class="ex1.ex1_Const">
+		<constructor-arg type="int" value="10000"/>
+		<constructor-arg type="String" value="김병기"/>
+	</bean>
+
+</beans>

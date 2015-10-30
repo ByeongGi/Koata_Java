@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+	<context:annotation-config/>
+	<!-- dataSource -->
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/jdbc/myora"></property>
+	</bean>
+	<!-- JdbcTemplate -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- Dao -->
+	<bean id="jdbcDao" class="dao.PlayMeDao" />
+	<bean id="myname" class="java.lang.String">
+		<constructor-arg value="김길동" />
+	</bean>
+	
+	<!-- Action -->
+	<bean id="playform" class="action.IndexAction" p:method="false"
+		p:url="playform.jsp" />
+	<bean id="playadd" class="action.AddAction" p:method="true"
+		p:url="list.kosta?query=playlist" />
+	<bean id="playlist" class="action.ListAciton" p:method="false"
+		p:url="playlist.jsp" />
+	<bean id="playDetail" class="action.DetailAction" p:method="false"
+		p:url="playdetail.jsp" />
+</beans>
