@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>2015. 9. 18.KOSTA</title>
+</head>
+<body>
+	<form action="">
+		<fieldset>
+		<label for="email">email:</label>
+		<input type="email" name="email" id="email" placeholder="이메일입력" required="required" />
+		<p><button type="button">SEND</button></p>
+		</fieldset>
+	</form>
+</body>
+</html>

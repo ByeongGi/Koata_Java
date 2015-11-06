@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bbs1">
+
+	<insert id="ins" parameterType="bvo" >
+		INSERT INTO BBS1
+		VALUES(bbs1_seq.nextVal, #{sub} , #{writer} , 
+		#{pwd} , #{cont} , #{reip} , #{hit} , sysdate 
+		)
+	</insert>
+		
+	<sql id="sql_list" >
+		SELECT num , sub , writer , hit , 
+		TO_CHAR(REGDATE, 'yyyy-mm-dd') regdate FROM BBS1
+		ORDER BY 1 DESC
+	</sql>
+	
+	
+	<select id="list" resultType="bvo" parameterType="java.util.HashMap">
+		select * from (select rownum as rnum, Z.*
+		from(<include refid="sql_list"/>) Z
+	<![CDATA[
+		where rownum <=#{record_end_no})
+		where rnum >=#{record_Start_no}
+	]]>
+	</select>
+	
+	
+	
+	
+	<select id="detail" resultType="bvo" parameterType="int">
+		SELECT num , 
+		sub, writer ,cont , writer , reip , hit,
+		TO_CHAR(REGDATE, 'yyyy-mm-dd') regdate 
+		FROM BBS1
+		WHERE num  = #{num}
+	</select>
+	
+	
+	<select id="cnt" resultType="int">
+		SELECT COUNT(*) from BBS1
+	</select>
+	
+	<select id="searchcnt" resultType="int" parameterType="java.util.HashMap">
+		SELECT COUNT(*) from BBS1
+		<if test="searchType != null">
+			<where>
+				<choose>
+					<when test="searchType == 1">
+						sub like '%'|| #{searchValue} || '%'
+					</when>
+					<when test="searchType == 2">
+						cont like '%'|| #{searchValue} || '%'
+					</when>
+					<when test="searchType == 3">
+						writer like '%'|| #{searchValue} || '%'
+					</when>
+					<otherwise></otherwise>
+				</choose>
+			</where>
+		</if>
+		ORDER BY 1 DESC
+	</select>
+
+
+<!-- 
+NUM
+SUB
+WRITER
+PWD
+CONT
+REIP
+HIT
+REGDATE
+ -->
+	<sql id="search_sql" >
+		SELECT num , sub , writer , pwd ,cont , reip , hit,
+		TO_CHAR(REGDATE, 'yyyy-mm-dd') regdate FROM BBS1
+		<if test="searchType != null">
+			<where>
+				<choose>
+					<when test="searchType == 1">
+						sub like '%'|| #{searchValue} || '%'
+					</when>
+					<when test="searchType == 2">
+						cont like '%'|| #{searchValue} || '%'
+					</when>
+					<when test="searchType == 3">
+						writer like '%'|| #{searchValue} || '%'
+					</when>
+					<otherwise></otherwise>
+				</choose>
+			</where>
+		</if>
+		<choose>
+			<when test="orderType == 1">
+			ORDER BY 1 DESC
+			</when>
+			<when test="orderType == 2">
+			ORDER BY 1 ASC
+			</when>
+			<otherwise>
+			ORDER BY 1 DESC
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<select id="searchlist" resultType="bvo" parameterType="java.util.HashMap">
+		select * from (select rownum as rnum, Z.*
+		from(<include refid="search_sql"/>) Z
+		<![CDATA[
+		where rownum <=#{record_end_no})
+		where rnum >=#{record_Start_no}
+		]]>
+	</select>
+	
+	
+	<select id="searchDown" resultType="bvo" parameterType="java.util.HashMap">
+		SELECT num , sub , writer , pwd ,cont , reip , hit,
+		TO_CHAR(REGDATE, 'yyyy-mm-dd') regdate FROM BBS1
+		<if test="searchType != null">
+			<where>
+				<choose>
+					<when test="searchType == 1">
+						sub like '%'|| #{searchValue} || '%'
+					</when>
+					<when test="searchType == 2">
+						cont like '%'|| #{searchValue} || '%'
+					</when>
+					<when test="searchType == 3">
+						writer like '%'|| #{searchValue} || '%'
+					</when>
+					<otherwise></otherwise>
+				</choose>
+			</where>
+		</if>
+		<choose>
+			<when test="orderType == 1">
+			ORDER BY 1 DESC
+			</when>
+			<when test="orderType == 2">
+			ORDER BY 1 ASC
+			</when>
+			<otherwise>
+			ORDER BY 1 DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+<!-- 
+NUM
+KCODE
+CNT
+WRITER
+COMM
+REIP
+REGDATE 
+-->
+	<insert id="commIn" parameterType="cvo" >
+		INSERT INTO BBS1COMM
+		VALUES(bbs1comm_seq.nextVal, #{kcode} , #{cnt} , #{writer} ,
+		#{comm} , #{reip} , sysdate
+		)
+	</insert>
+
+	<select id="commList" parameterType="int" resultType="cvo" >
+		SELECT num ,
+		kcode, cnt , writer , comm , reip ,
+		TO_CHAR(regdate, 'yyyy-mm-dd') regdate 
+		FROM BBS1COMM
+		WHERE kcode  = #{kcode} 
+		ORDER BY 1 DESC
+	</select>
+	
+	
+	
+	
+	
+</mapper>

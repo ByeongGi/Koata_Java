@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	 구현 사항:	
+	 2015.10.15
+	 @author E조 유현주
+ -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="article"> <!-- 필수!! -->
+	<select id="selectCount">
+		select count(*) from article
+	</select>
+	<select id="selectList" resultType="avo">
+		select article_id, group_id, sequence_no, posting_date, read_count,
+		writer_name, password, title, content from article
+	</select>
+	<insert id="insert" parameterType="avo">
+		insert into article values(article_seq.nextVal, #{group_id}, #{sequence_no}, 
+		sysdate, #{read_count}, #{writer_name}, #{password}, #{title}, #{content}
+		)
+	</insert>
+	<select id="detail" resultType="avo" parameterType="int">
+		select * from article where article_id = #{article_id}
+	</select>
+	<update id="readCount" parameterType="int">
+		update article set read_count = read_count + 1 where article_id = #{article_id}
+	</update>
+	<update id="update" parameterType="avo">
+		update article set title = #{title}, content = #{content} where article_id = #{article_id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from article where article_id = #{article_id}
+	</delete>
+
+</mapper>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

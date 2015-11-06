@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>2015. 9. 18.KOSTA</title>
+<style type="text/css">
+
+
+* {
+	padding: 0px;
+	margin: 0px; /* 브라우저 표준 맞추기  */
+}
+div {
+	width: 300px;
+	margin: auto;
+}
+</style>
+<script type="text/javascript">
+//브라우저가 실행 되기 전에 발생함
+/* 	alert("무조건 경고창 발생 ㅋㅋㅋ");
+	window.onload=function(){ // 문서객체가 다 로딩될 때까지 
+							  // 기다렸다가 실행(변수초기화 안하고 쓰는 느낌이랑 같다..)
+		alert("무조건 경고창 발생 ㅋㅋ")		
+	}; */
+	 
+	function msgClick() {
+		alert("클릭되었음");
+		// 함수 동작 분석 : msg값을 읽어와서
+		// target에 출력하는 동작 수행
+		// dom의 아이디로 읽어오는 방식
+		var msgv = document.getElementById("msg").value;  // id값인 msg input 태그에서 가져옴
+														  //  value는 텍스트 박스의 값을 가져옴 
+		console.log("MSGV : " + msgv );
+		
+		//target은 input요소가 아니기 때문에 value로 값을 표현하지 않는다.
+		document.getElementById("target").innerHTML=msgv;
+		//스타일 변경
+		document.getElementById("target").style.backgroundColor="orange";
+		document.getElementById("target").style.width="200px";
+		document.getElementById("target").style.height="300px";
+	}
+</script>
+
+</head>
+<body>
+	<div id="wrap">
+		<form action="" method="post">
+			MSG : <input type="text" name="msg" id="msg" /> <input type="button"
+				value="click" onclick="msgClick()" />
+		</form>
+	</div>
+	<div id="target">여기는 타겟</div>
+
+
+</body>
+</html>

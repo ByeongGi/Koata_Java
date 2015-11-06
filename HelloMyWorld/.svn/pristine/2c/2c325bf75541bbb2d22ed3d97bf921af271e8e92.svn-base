@@ -1,0 +1,96 @@
+package vo;
+/**
+ * 
+ * 
+ * 
+ * 
+ * @author kim Byeong GI
+ *
+ */
+/*
+	article_id number constraint article_article_id_pk primary key,
+	group_id number not null,
+	sequence_no char(16) not null,
+	posting_date date not null,
+	read_count number not null,
+	writer_name varchar(20) not null,
+	password varchar(10),
+	title varchar(100),
+	content clob
+*/
+
+public class ArticleVo {
+	private int group_id;
+	private String sequence_no;
+	private String posting_date;
+	private int read_count;
+	private String writer_name;
+	private String password;
+	private String title;
+	private String content;
+	public int getGroup_id() {
+		return group_id;
+	}
+	public void setGroup_id(int group_id) {
+		this.group_id = group_id;
+	}
+	public String getSequence_no() {
+		return sequence_no;
+	}
+	public void setSequence_no(String sequence_no) {
+		this.sequence_no = sequence_no;
+	}
+	public String getPosting_date() {
+		return posting_date;
+	}
+	public void setPosting_date(String posting_date) {
+		this.posting_date = posting_date;
+	}
+	public int getRead_count() {
+		return read_count;
+	}
+	public void setRead_count(int read_count) {
+		this.read_count = read_count;
+	}
+	public String getWriter_name() {
+		return writer_name;
+	}
+	public void setWriter_name(String writer_name) {
+		this.writer_name = writer_name;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,65 @@
+/**
+ * 구현 사항:
+ * 		
+ * 2015.10.15
+ * @author 박성민
+ */
+//------------------------------mapping이 필요함!!!!
+package dao;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import service.FactoryService;
+import vo.ArticleVo;
+
+public class ArticleDao {
+	private static ArticleDao dao;
+	private ArticleVo v;
+	
+	private ArticleDao() {
+	}
+	public static synchronized ArticleDao getInstance() {
+		if(dao == null) dao = new ArticleDao();
+		return dao;
+	}
+	//--------------------------------------------------select list, count 등등 구현
+	//------------------------------▼mapping이 필요함!!!!▼
+	public int selectCount() {//전체 아티클 글 '갯수'를 불러오는 메서드
+		SqlSession ss = FactoryService.getFactory().openSession();
+		int res = ss.selectOne("");//map.xml count(*) 전체 갯수 받아오는 sql이 필요
+		ss.close();
+		return res;
+	}
+	public List<ArticleVo> select() {//전체 목록 불러오는 메서드
+		SqlSession ss = FactoryService.getFactory().openSession();
+		List<ArticleVo> list = ss.selectList("");//map.xml 전체 목록 받아오는 sql 필요
+		ss.close();
+		return list;
+	}	
+	public ArticleVo getArticleDetail(int Article_num) {//아티클의 상세 내용을 불러옴
+		SqlSession ss = FactoryService.getFactory().openSession();
+		ArticleVo v= ss.selectOne("",Article_num);//번호가 특정한 Article 가저오는 sql
+		ss.close();
+		return v;
+	}
+	public void writeArticle(ArticleVo v) {//아티클 작성하면 db에 등록
+		SqlSession ss = FactoryService.getFactory().openSession(true);
+		ss.insert("",v);//db에 입력하는 sql
+		ss.close();
+	}
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+	
+	
+	<insert id="insert" parameterType="mvo">
+		INSERT INTO TESTMEM 
+		VALUES( testmem_seq.nextVal , #{id} , #{pwd} , #{name} , #{gender} , sysdate )
+	</insert>
+	
+	<select id="selectList" resultType="mvo">
+		SELECT NUM, ID , PWD , NAME , GENDER , REGDATE 
+		FROM TESTMEM
+		ORDER BY NUM DESC
+	</select>
+
+
+	<select id="idChk" parameterType="string" resultType="int">
+		SELECT COUNT(*) FROM TESTMEM
+		WHERE ID = #{id} 
+	</select>
+	
+	<select id="totalCnt" resultType="int">
+		SELECT COUNT(*) FROM TESTMEM
+	</select>
+	
+
+	<select id="paging_list" resultType="mvo" parameterType="java.util.HashMap">
+		select * from (select rownum as rnum, Z.*
+			from(SELECT * FROM TESTMEM
+			ORDER BY NUM DESC) Z
+			<![CDATA[
+			where rownum <=#{record_end_no})
+		where rnum >=#{record_Start_no}
+		]]>
+	</select>
+	
+	
+	
+	
+	
+	
+</mapper>

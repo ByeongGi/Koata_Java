@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 구현 사항: 2015.10.XX @author 자기이름 -->
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.i18n.encoding" value="EUC-KR" />
+	<package name="default" namespace="/" extends="struts-default">
+
+		<!-- documentRoot의 경로를 index로 요청을 하라는 뜻 -->
+		<default-action-ref name="index" />
+
+
+		<action name="index">
+			<result>index.jsp</result>
+		</action>
+		
+		<!-- 하기부터는 미구현 상태 목록 -->
+		<!-- 게시판 리스트 -->
+		<action name="boardList" class="action.BoardListAction">
+			<result>/boardList.jsp</result>
+		</action>
+		<!-- 게시판 작성폼 -->
+		<action name="write">
+			<result>/write.jsp</result>
+		</action>
+
+		<action name="insert" class="action.InsertAction">
+			<result type="redirectAction">
+				<param name="actionName">list</param>
+			</result>
+		</action>
+
+		<action name="list" class="action.ListAction">
+			<result>/list.jsp</result>
+		</action>
+
+		<action name="view" class="action.ViewAction">
+			<result>/view.jsp</result>
+		</action>
+
+		<action name="commIn" class="action.CommInAction">
+			<result type="redirectAction">
+				<param name="actionName">view</param>
+				<param name="no">${no}</param>
+			</result>
+		</action>
+		<action name="reply" class="action.ReplyAction">
+			<result>/reply.jsp</result>
+		</action>
+		<action name="reply_in" class="action.ReplyInsertAction">
+			<result type="chain">list</result>
+			<result name="failure">/failure.jsp</result>
+		</action>
+
+		<action name="chartlist">
+			<result>/basicChart.jsp</result>
+		</action>
+		<action name="chart" class="action.CharDataAction">
+		</action>
+	</package>
+</struts>

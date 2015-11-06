@@ -1,0 +1,25 @@
+package action;
+
+import java.util.List;
+
+import com.opensymphony.xwork2.Action;
+
+import dao.ArticleDao;
+import vo.ArticleVo;
+
+public class ArticleAction implements Action {
+
+	private List<ArticleVo> list;
+	
+	public List<ArticleVo> getList() {
+		return list;
+	}
+
+	@Override
+	public String execute() throws Exception {
+		ArticleDao.getInstance().select();
+		return SUCCESS;
+	}
+
+	
+}

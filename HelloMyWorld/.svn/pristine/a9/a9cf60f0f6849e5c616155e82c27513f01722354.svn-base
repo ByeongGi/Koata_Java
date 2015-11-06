@@ -1,0 +1,39 @@
+package dao;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import service.FactoryService;
+import vo.BoardVO;
+
+
+
+public class BoardDao {
+	private static BoardDao dao;
+	
+	private BoardDao() {
+	}
+	public static synchronized BoardDao getInstance() {
+		if(dao == null) dao = new BoardDao();
+		return dao;
+	}
+	public List<BoardVO> getlList(BoardVO vo) {
+		SqlSession ss = FactoryService.getFactory().openSession();
+		List<BoardVO> list = ss.selectList("board.listAll", vo);
+		ss.close();
+		return list;
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+

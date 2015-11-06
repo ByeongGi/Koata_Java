@@ -9,7 +9,8 @@ public class NameReturnAdvice
 		
 		@AfterReturning(pointcut="execution(* ex1.DaoImple.second())",returning="ret")
 		public void myReturnMethod(JoinPoint jp,Object ret)
-		{
+		{	
+			
 			String name = jp.getSignature().getName();
 			System.out.println("Name"+name);
 			System.out.println("반환값"+ret);

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bbs1">
+<!-- 
+NUM
+SUB
+WRITER
+PWD
+CONT
+REIP
+HIT
+REGDATE
+ -->
+	<insert id="ins" parameterType="bvo" >
+		INSERT INTO BBS1
+		VALUES(bbs1_seq.nextVal, #{sub} , #{writer} , 
+		#{pwd} , #{cont} , #{reip} , #{hit} , sysdate 
+		)
+	</insert>
+		
+	<select id="list" parameterType="bvo" resultType="bvo">
+		SELECT num , sub , writer , hit , 
+		TO_CHAR(REGDATE, 'yyyy-mm-dd') regdate FROM BBS1
+		ORDER BY 1 DESC
+	</select>
+	
+	<select id="detail" resultType="bvo" parameterType="int">
+		SELECT num , 
+		sub, writer ,cont , writer , reip , hit,
+		TO_CHAR(REGDATE, 'yyyy-mm-dd') regdate 
+		FROM BBS1
+		WHERE num  = #{num}
+	</select>
+<!-- 
+NUM
+KCODE
+CNT
+WRITER
+COMM
+REIP
+REGDATE 
+-->
+	<insert id="commIn" parameterType="cvo" >
+		INSERT INTO BBS1COMM
+		VALUES(bbs1comm_seq.nextVal, #{kcode} , #{cnt} , #{writer} ,
+		#{comm} , #{reip} , sysdate
+		)
+	</insert>
+
+	<select id="commList" parameterType="int" resultType="cvo" >
+		SELECT num ,
+		kcode, cnt , writer , comm , reip ,
+		TO_CHAR(regdate, 'yyyy-mm-dd') regdate 
+		FROM BBS1COMM
+		WHERE kcode  = #{kcode} 
+		ORDER BY 1 DESC
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

@@ -1,0 +1,14 @@
+TESTdsl;dkas;ldkasl;
+
+한글 테스트 합니다 
+박종문
+이홍택
+
+
+checkout ->  내 svn 서버로부터 내 컴퓨터에 소스를 내려받는것
+commit -> 내 소스를 svn 서버에 올리는것 
+
+update ->  다른 사용자가 커밋하여 변경된 소스를 내려 받는것
+
+overriding and update 내 소스와 충돌되는 부분을 제외한 부분을 
+내려받는것 

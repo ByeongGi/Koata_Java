@@ -1,0 +1,28 @@
+/**
+ * 구현 사항:
+ * 		
+ * 2015.10.XX 
+ * @author 자기이름
+ */
+package action;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+public class DateAction extends ActionSupport{
+
+	private String msg;
+	@Override
+	public String execute() throws Exception {
+	
+		SimpleDateFormat sdf = new SimpleDateFormat();
+		msg = sdf.format(new Date());
+		
+		return SUCCESS;
+	}
+	public String getMsg() {
+		return msg;
+	}
+	
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- typeAliases 설정을 하면 VO 객체에 alias 줄수 있다. -->
+	<typeAliases>
+		<typeAlias type="or.kosta.mvc.vo.CustomerVo" alias="cvo"/>
+		<typeAlias type="or.kosta.mvc.vo.SawonPayVo" alias="pvo"/>
+		<typeAlias type="or.kosta.mvc.vo.MemberVo" alias="mvo"/>
+	</typeAliases>
+</configuration>

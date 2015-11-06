@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>2015. 9. 18.KOSTA</title>
+<script type="text/javascript">
+
+function colorChange() {
+	
+	var colorv = document.getElementById("cc").value;
+	console.log("colorv " + colorv );
+	
+	//document.getElementsByTagName("body").style.backgroundColor=colorv;
+	document.getElementById("dd").style.backgroundColor=colorv;
+}
+</script>
+</head>
+<body>
+	<div id="dd">
+	<from>
+		<filedset>
+			<label for="cc">color:</label>
+			<input type="color" name="cc" id="cc"/>
+			<p><button type="button" onclick="colorChange()" >SEND</button></p>
+		</filedset>
+
+	</from>
+	</div>
+</body>
+</html>

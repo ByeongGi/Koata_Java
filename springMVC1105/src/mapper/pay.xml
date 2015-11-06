@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sawonpay">
+<!-- 
+NUM	NUMBER
+DNAME	VARCHAR2(20 BYTE)
+SABUN	NUMBER(10,0)
+SANAME	VARCHAR2(34 BYTE)
+SAPAY	NUMBER(6,0)
+PAYDATE	DATE
+EDATE	DATE	 
+-->
+	
+	<insert id="insert" parameterType="pvo">
+		INSERT INTO KOSTAPAY 
+		VALUES( kostapay_seq.nextVal , #{dname} , #{sabun} , #{saname} , #{sapay} , #{paydate} , sysdate )
+	</insert>
+	
+	<select id="selectList" resultType="pvo">
+		SELECT num , dname , sabun , saname , sapay , paydate , edate
+		FROM KOSTAPAY
+		ORDER BY NUM DESC
+	</select>
+
+
+	<select id="totalCnt" resultType="int">
+		SELECT COUNT(*) FROM TESTMEM
+	</select>
+	
+
+	<select id="paging_list" resultType="pvo" parameterType="java.util.HashMap">
+		select * from (select rownum as rnum, Z.*
+			from(SELECT * FROM KOSTAPAY
+			ORDER BY NUM DESC) Z
+			<![CDATA[
+			where rownum <=#{record_end_no})
+		where rnum >=#{record_Start_no}
+		]]>
+	</select>
+	
+	
+	
+	
+</mapper>

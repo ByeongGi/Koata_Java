@@ -1,0 +1,45 @@
+/**
+ * 구현 사항:
+ * 		
+ * 2015.10.XX 
+ * @author 자기이름
+ */
+package dao;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import service.FactoryService;
+import vo.BoardVO;
+
+
+
+public class ArticleDao {
+	private static ArticleDao dao;
+	
+	private ArticleDao() {
+	}
+	public static synchronized ArticleDao getInstance() {
+		if(dao == null) dao = new ArticleDao();
+		return dao;
+	}
+	public List<BoardVO> getlList(BoardVO vo) {
+		SqlSession ss = FactoryService.getFactory().openSession();
+		List<BoardVO> list = ss.selectList("board.listAll", vo);
+		ss.close();
+		return list;
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+

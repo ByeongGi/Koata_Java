@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd">
+	
+	<!-- Bean 스캔  -->
+	<context:component-scan base-package="or.kosta.mvc" annotation-config="true"/>
+	<!-- 경로 / 인식 -->
+	<mvc:annotation-driven/>
+	
+	<!-- 페이징 하는 Bean을 선언  -->
+	<!-- bbs1Paging 일반 게시판 리스트 출력하는 페이징 BEAN -->
+	<bean id="bbs1Paging" class="or.kosta.mvc.util.PagingUtill">
+		<constructor-arg  name="pageno" value="1"/>
+		<constructor-arg  name="page_per_record_cnt" value="10"/>
+		<constructor-arg  name="group_per_page_cnt" value="3"/>
+	</bean>
+	<!-- Searchbbs1Paging 검색한 결과를  출력하는 페이징 BEAN -->
+	<bean id="Searchbbs1Paging" class="or.kosta.mvc.util.PagingUtill">
+		<constructor-arg  name="pageno" value="1"/>
+		<constructor-arg  name="page_per_record_cnt" value="10"/>
+		<constructor-arg  name="group_per_page_cnt" value="5"/>
+	</bean>
+	<!--  -->
+	
+	<!-- DB 설정 연동 시작 -->
+	<!-- dataSource -->
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/jdbc/myora"></property>
+	</bean>
+	<!-- Mybatis 연동 설정 -->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:config/config-mybatis.xml"/>
+		<property name="mapperLocations" value="classpath*:mapper/*.xml"/>
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactoryBean"/>
+	</bean>
+	<!-- Mybatis 연동 끝 -->
+	
+	
+	
+	<!-- ViewResolver : Controller가 수행 후 반납하는 정보에서 ViewName을 찾아서 View의 위치화 확장자를 
+		결합하여 Dispatcher에게 돌려준다. -->
+	<bean id="viewResolver1"
+		class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+		<property name="order" value="1" />
+		<property name="basename" value="views" />
+		
+	</bean>
+	<!-- ViewResolver : Controller가 수행 후 반납하는 정보에서 ViewName을 찾아서 View의 위치화 확장자를 
+		결합하여 Dispatcher에게 돌려준다. -->
+	<bean id="viewResolver2"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="2"></property>
+		<property name="prefix" value="/WEB-INF/views/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	
+	<!-- MutiPart Resolver 선언-->
+	<bean id="multipartResolver" 
+	class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	
+	
+	
+	
+</beans>
