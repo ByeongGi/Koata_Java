@@ -1,0 +1,7 @@
+@CHARSET "UTF-8";
+body,div,ul,li,h1,h2,h3,h4,form,p,button{ margin: 0px;padding: 0px;}
+li {list-style: none;}
+input,select,button { vertical-align: middle;}
+a {color: #222; text-decoration: none;}
+a:HOVER {color: #390; text-decoration: underline;}
+table{border-collapse: collapse;border-spacing: 0px;}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<form>
+		<fieldset style="border-color: orange;"> <!-- 테두리 영역 --> 
+			<legend> dataList 연습 </legend> <!-- fieldset 타이틀 -->
+			<label for="ss "> Homepage </label> 
+			<!-- 사용자로부터 type 별로 입력 받는 태그 
+				 id :는 순수하게 자바스크립트, CSS 식별자
+				 name : 폼의 데이터가 서버로 전송되었을때 보내질 값의 이름
+				 required : 해당 textfiled에 값이 없을때 반드시 값을 넣으라는 경고속성
+				 ex3_myURL.html 에 자기가 좋아하는 사이트가 나오도록 해보시오 
+			-->
+				<input type="url" id="ss" list="s_data" required>
+			<datalist id="s_data">
+				<option value="http://www.shinhan.com" label="신한">
+				<option value="http://www.naver.com" label="네이버">
+				<option value="http://www.kosta.com" label="코스타">
+			</datalist>
+			<p><button type="submit">SEND</button>
+		</fieldset>
+	</form>
+</body>
+</html>

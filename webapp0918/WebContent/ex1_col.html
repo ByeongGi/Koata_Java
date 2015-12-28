@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+* {
+	padding: 0p;
+	margin: 0px;
+} /*브라우져 표준 맞추기*/
+div {
+	width: 300px;
+	margin: auto;
+}
+</style>
+<script>
+	// 브라우져가 실행되기전에 발생함 
+	//alert("경고한다");
+
+	//window.onload=function(){ // 문서객체가 다 로딩될떄까지 기다렸다가 실행 
+	//	alert("무조건 경고창 발생ㅋㅋ")
+	//}
+
+	function msgClick() {
+		alert("클릭되었음");
+		// 함수 동작 분석 : msg 값을 읽어와서
+		// target에 출력하는 동작 수행
+		// dom 의 아이디로 읽어오는 방식
+		var msgv = document.getElementById("msg").value;
+		console.log("MSGV :" + msgv);
+
+		// target 은 input 요소가 아니기 때문에 value 로 값을 표현하지 않는다.
+		document.getElementById("target").innerHTML = msgv;
+		// 동적 스타일 변경
+		document.getElementById("target").style.backgroundColor = 'blue';
+		document.getElementById("target").style.width = '200px';
+		document.getElementById("target").style.heigt = '300px';
+
+	}
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<form action="POST">
+			MSG: <input type="text" name="msg" id="msg"> <input
+				type="button" value="click" onclick="msgClick()">
+		</form>
+	</div>
+
+	<div id="target">여기는 타겟 !</div>
+</body>
+</html>

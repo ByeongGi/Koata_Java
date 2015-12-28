@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+	
+	<!-- 어노테이션 인식 세팅 /루트 상태 경로 인식 -->
+	<mvc:annotation-driven/>
+	<!-- 스프링 MVC 세팅 시작 -->
+	<context:component-scan base-package="or.kosta.mvc" annotation-config="true" />
+	<!-- 일반 서블릿 요청을 받아들임, jsp 뿐만 아니라 다른 자원들도 가져가기 위해 설정 -->
+	<mvc:default-servlet-handler/>
+	<!-- 자원 경로 지정하기  -->
+	<mvc:resources location="/resources/" mapping="/resources/**" />
+	
+	
+	<!-- JDBC 연동 시작 -->
+	<!-- dataSource -->
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/jdbc/myora"></property>
+	</bean>
+	
+	<!-- Mybatis SqlSessionFatory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:config/config-mybatis.xml"/>
+		<property name="mapperLocations" value="classpath*:mapper/*.xml"></property>
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<!-- Mybatis SqlSessionTemplate -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>		
+	</bean>
+	
+	
+
+
+
+	
+	
+	 <!-- 웹서버가 시작될때  설정 파일을 로딩함 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="1"></property>
+		<property name="prefix" value="/WEB-INF/views/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+   
+	<!-- Tiles 설정 시작-->
+	<bean id="tilesviewResolver" 
+    	class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+    	
+    <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+    	<property name="order"  value="0"/>
+	</bean>
+	
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+    <property name="definitions">
+        <list>
+            <value>/WEB-INF/tiles/tiles-definitions.xml</value>
+        </list>
+    </property>
+    <!-- Tiles 설정 끝-->
+   
+  
+    
+</bean>
+
+</beans>

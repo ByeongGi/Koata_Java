@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<form >
+		<fieldset style="border-color: green;">
+			<legend> fieldSet </legend>
+			<label for="ss"> 홈페이지 </label>
+			<input type="url" id="ss" list="a_data" required>
+			
+			<datalist id = "a_data">
+				<option value="http://www.naver.com" label="네이버">
+				<option value="http://www.naver.com" label="신한">
+				<option value="http://www.naver.com" label="test02">
+				<option value="http://www.naver.com" label="test03">
+			</datalist>
+			<p> <button type="submit"> 이동 </button>
+		</fieldset>
+	</form>
+</body>
+</html>

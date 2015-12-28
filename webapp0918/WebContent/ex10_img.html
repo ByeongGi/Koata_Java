@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+	#wrap{ width: 50%; margin: auto;}
+	#target, #menu{ width: 100%; margin: auto; text-align: center;}
+	#target img{ width: 50%; height: 356px;}
+	#menu img{ width: 100px; height: 120px}
+</style>
+<script>
+function change(obj) {
+	document.getElementById("chrome").src =obj.src;
+	console.log(obj);
+}
+</script>
+</head>
+<body>
+	<div id = "wrap">	
+		<div id ="target">
+		<img src="images/chrome.png" id ="chrome">
+		</div id="menu">
+		<div id="menu" >
+		<img src="images/firefox.png" onmouseover="change(this)">
+		<img src="images/opera.png" onmouseover="change(this)">
+		<img src="images/ie.png" onmouseover="change(this)">
+		</div>
+		<!-- this 엘레멘트 객체 자신을 반환 -->
+	</div>
+</body>
+</html>

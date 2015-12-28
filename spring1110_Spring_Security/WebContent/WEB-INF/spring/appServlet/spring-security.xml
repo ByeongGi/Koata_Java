@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security.xsd">
+	<!-- 권한 이름 설정 -->
+	<beans:bean id="roleVoter"
+		class="org.springframework.security.access.vote.RoleVoter">
+		<beans:property name="rolePrefix" value=""></beans:property>	
+    </beans:bean>
+	
+	<beans:bean id="accessDecisionManager" 
+		class="org.springframework.security.access.vote.AffirmativeBased">
+		<beans:constructor-arg name="decisionVoters"  ref="roleVoter"/>
+	</beans:bean>
+	
+	<!-- 
+		authentication-manager-ref : 인증을 관리하는 매니저가 참조하는 설정 
+		accessDecisionManager : 기본 ACL을 사용자가 임의 정의로 변경하는 설정을 참조하는 속성 
+	 -->
+	<http authentication-manager-ref="jdbc-auth" access-decision-manager-ref="accessDecisionManager">
+		<intercept-url pattern="/emp/**" access="Admin" />
+		<intercept-url pattern="/myform" access="Admin,User" />
+		<!-- 로그인 폼 커스텀  -->
+		<form-login login-page="/login" authentication-failure-url="/denied"
+					username-parameter="username"
+					password-parameter="password"
+					default-target-url="/home"
+		/>
+		<!-- 세션 로그아웃 시 삭제 성공시 다시 로그인 화면으로 분기  -->
+		<logout invalidate-session="true" logout-success-url="/logout"
+				logout-url="/logout"
+		/>
+		<!-- 에러시 모든 접근 denied page 로 분기 -->
+		<access-denied-handler error-page="/denied"/>
+		
+		<!-- 세션 삭제 URL -->
+		<session-management invalid-session-url="/login">
+			<!-- 동시 접속시 : 최대 세션의 갯수   -->
+			<concurrency-control max-sessions="1" expired-url="/login"/>
+		</session-management>
+	</http>
+	
+	
+	
+	<!-- dd -->
+	<authentication-manager id="in-memoryAuth">
+		<authentication-provider >
+			<user-service>
+				<user name="javabook" password="1234" authorities="Admin" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+	
+	<!--  authentication-manager 랑 연동할 dataSource--> 
+	<!-- dataSource -->
+	<beans:bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<beans:property name="jndiName" value="java:comp/env/jdbc/myora" />
+	</beans:bean>
+	
+	<!-- users-by-username-query 유저 테이블로부터 정보를 가져온다 -->
+	<!-- authorities-by-username-query Roles 테이블로부터 권한 정보를 가져온다 -->
+	<authentication-manager id="jdbc-auth">
+		<authentication-provider>
+			<jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="select username,password,enabled from employees where username=?"
+				authorities-by-username-query="select username,role from roles where username=?"
+			/>
+		</authentication-provider>
+	</authentication-manager>
+	
+	
+	
+	
+</beans:beans>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+      
+<tiles-definitions>
+
+	<!-- Tiles 선언 기본 템플릿 선언 -->
+  	<definition name="defalutTemplate" template="/WEB-INF/template/defalut/template.jsp" >
+  		<put-attribute name="header" 
+  			value="/WEB-INF/template/defalut/header.jsp" />
+  		<put-attribute name="menu" 
+  			value="/WEB-INF/template/defalut/menu.jsp" />
+  		<put-attribute name="footer" 
+  			value="/WEB-INF/template/defalut/footer.jsp" />
+  	</definition>
+  	
+  	<definition name="*" extends="defalutTemplate">
+  		<put-attribute name="body" value="/WEB-INF/views/{1}.jsp"/>
+  	</definition>
+  	
+</tiles-definitions>

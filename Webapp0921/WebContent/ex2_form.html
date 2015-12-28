@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#wrap {
+	width: :350px;
+	margin: auto;
+}
+
+#wrap table {
+	width: 100%;
+	border: 1px solid;
+}
+
+#wrap th {
+	color: blue;
+	font-weight: bold;
+	background-color: gray;
+}
+</style>
+<script type="text/javascript">
+function check() {
+	var idv =document.getElementById("id");
+	var pwdv =document.getElementById("pwd");
+	var namev =document.getElementById("name");
+	var addrv =document.getElementById("addr");
+	var introv =document.getElementById("intro");
+	
+	if (idv.value=="" || pwdv.value=="" || addrv.value =="" || namev.value="" || addrv.value="" || introv.value=="") {
+		alert("빈칸을 작성하세요!");
+		idv.focus();
+		return false;
+	} 
+}
+</script>
+</head>
+<body>
+	<div id=wrap>
+		<!-- method는 클라이언트가 서버로 보내는 전송 방식
+			 action : <form></form> 의 데이터(name 값)를 보낼 서버의 주소 
+			 OnSubmit  = "return check()"
+			 submit 되었을때 감지하는 이벤트 핸들러에 함수를 호출  
+			
+			  -->
+			 
+		<form  method="post" action="addMember" onsubmit="return check()">
+			<table border="1">
+				<tr>
+					<th>아이디</th>
+					<td><input name="id" id="id" /></td>
+				</tr>
+				<tr>
+					<th>비밀번호</th>
+					<td><input type="password" name="pwd" id="pwd"></td>
+
+				</tr>
+				<tr>
+					<th>회원이름</th>
+					<td><input name="name" id="name" /></td>
+				</tr>
+				<tr>
+					<th>회원주소</th>
+					<td><input name="addr" id="addr"/></td>
+				</tr>
+				<tr>
+					<th>자기소개</th>
+					<td><textarea name="intro" id="intro" rows="5" cols="25"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<th colspan="2">
+					<input type="submit" value="저장" />&nbsp;
+					<input type="reset" value="취소" />
+					</th>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

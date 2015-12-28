@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>ex2_col.html</title>
+<script type="text/javascript" charset="utf-8">
+	function setColor() {
+	  var color = document.getElementById("cc").value;
+	  document.getElementById("body").style.backgroundColor = color;
+	  console.log(color);
+	}
+</script>
+</head>
+<body id ="body">
+    <fieldset id="" class="">
+        <label for="cc"></label>
+        <input type="color" name="cc" id="cc"/>
+        <p><button type= "button" id ="btn1" onclick="setColor()"> SEND </botton></p>
+            
+    </fieldset>
+</body>
+</html>

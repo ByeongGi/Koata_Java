@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function test() {
+		var msg = document.getElementById("msg").value;
+		if (confirm("정말로 이동하시겠습니까?")) {
+			// 자바 스크립트를 사용하여 강제로 이동하는 메서드
+			location = "re?cmd="+msg;
+		}
+	}
+</script>
+</head>
+<body>
+	<input type="text" name= "msg" id ="msg" >
+	<input type="button" value="이동" onclick="test()">
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="wrap">
+		<div id="menu">
+			<ul>
+				<li><a href="">메뉴등록</a></li>
+				<li><a href="">메뉴리스트</a></li>
+				<li><a href="">주문하기</a></li>
+				<li><a href="">주문리스트</a></li>
+				<li><a href="">기타</a></li>
+			</ul>
+		</div>
+		<!-- Content 영역 시작 -->
+		<div id="content">
+			<form action="post" action="menuAdd">
+				<table>
+					<tr>
+						<td colspan="2">메뉴 등록품
+						<td>
+					</tr>
+					<tr>
+						<th>분류</th>
+						<td><select name="mcode" id="mcode">
+								<option>-- 선택 --</option>
+								<option value="JP">일식</option>
+								<option value="KR">한식</option>
+								<option value="CH">중식</option>
+								<option value="BS">분식</option>
+								<option value="YS">양식</option>
+						</select> <select name="mname" id="mname">
+								<option>-- 선택 --</option>
+						</select></td>
+					</tr>
+					<tr>
+						<th>가격</th>
+						<td><input type="number" step="1000" min="10000"
+							value="10000" /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="submit" value="등록"></td>
+					</tr>
+				</table>
+
+			</form>
+			<!-- Content 영역 끝 -->
+		</div>
+
+	</div>
+</body>
+</html>

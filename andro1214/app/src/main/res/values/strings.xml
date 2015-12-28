@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">andro1214</string>
+    <string-array name="pic">
+        <item>Image1</item>
+        <item>Image2</item>
+        <item>Image3</item>
+        <item>Image4</item>
+        <item>Image5</item>
+        <item>Image6</item>
+    </string-array>
+</resources>

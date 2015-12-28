@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- 컴포넌트의 R.java 등록 ->id    레이아웃 객체로 등록   -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hi ~ MY Fist Android"
+        android:id="@+id/ex1_text"
+        android:gravity="center"
+        android:layout_marginTop="100px"
+        android:textSize="50px"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Click"
+        android:id="@+id/ex1_btn"
+        android:layout_marginTop="100px"
+        android:textColor="#0b3564"
+        />
+</LinearLayout>

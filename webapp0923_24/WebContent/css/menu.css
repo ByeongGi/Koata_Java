@@ -1,0 +1,56 @@
+@CHARSET "UTF-8";
+#wrap {
+	width: 80;
+	margin: auto;
+}
+
+#menu {
+	width: 100%;
+	margin: auto;
+}
+
+#menu ul {
+	padding: 10px
+}
+
+#menu ul li {
+	width: 100px;
+	text-align: center;
+	list-style: none;
+	float: left;
+	background: red;
+	margin-left: 10px;
+	height: 30px
+}
+
+#menu ul li:hover {
+	background: green;
+	color: #ffffff
+}
+
+
+/* 메뉴 리스트 스타일  */
+#content {
+	clear: both;
+	width: 100%;
+	background: green;
+	height: 300px;
+}
+
+#mlist {
+	width: 600px;
+	margin: auto;
+	background-color: white;
+	border: 1px solid;
+	clear: right;
+}
+
+#mlist thread th {
+	border: 1px solid;
+	border-collapse: collapse;
+}
+
+#mlist thread th {
+	border: 1px solid;
+	background: silver;
+}

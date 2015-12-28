@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<style type="text/css">
+div {
+	width: auto;
+	margin: auto;
+}
+
+#GameImg {
+	width: 600px;
+	height: 250px;
+	margin: auto;
+}
+
+ #layout{
+	position: fixed;
+	margin: auto;
+}
+</style>
+<script>
+	// Gobal Variable
+	var user = ""; // SELECT OLD / EVEN
+	var com = ""; // SELECT OLD / EVEN
+	var res = false; // GAME WIN / LOSE 
+	var cnt = 0; // TATAL GAME COUNT
+	var winCnt = 0; // WIN COUNT
+	var ar = [ "", "홀", "짝" ];
+
+	// Meun Loding....
+	function menuLoding() {
+		var content = "<h4>게임 시작!<h4><br>";
+		content += '<label id ="cnt">TOTAL GAME</label><br>';
+		content += '<label id ="win">WIN COUNT</label><br>';
+		content += '<label id ="user">USER</label><br>';
+		content += '<label id ="computer">COM</label><br>';
+		content += '<input type="button" id ="old" name ="old" value="홀" onclick="result(this)">';
+		content += '<input type="button" id ="even" name ="even" value="짝" onclick="result(this)">';
+		content += '<input type="button" id ="end" name ="end" value="종료" onclick="reset()"><br>';
+		document.getElementById("start").innerHTML = content;
+	}
+
+	// MENU RESET ! 
+	function reset() {
+		var content = '<h4>게임을 시작합니다 !</h4><br>';
+		content += '<button type="button" onclick="menuLoding()">GAME START</button><br>';
+		document.getElementById("start").innerHTML = content;
+		document.getElementById("GameImg").src = 'images/mainlogo.png';
+		// Reset Default count ! 
+		cnt = 0;
+		winCnt = 0;
+	}
+
+	// GAME RESULT VIEW 
+	function show() {
+		if (res) {
+			document.getElementById("user").innerHTML = "USER :" + user;
+			document.getElementById("computer").innerHTML = "COM :" + com;
+			++cnt;
+			document.getElementById("cnt").innerHTML = "TATAL GAME :" + cnt;
+			++winCnt;
+			document.getElementById("win").innerHTML = "WIN COUNT :" + winCnt;
+			document.getElementById("GameImg").src = 'images/win.jpg';
+			// alert("WIN");
+		} else {
+			document.getElementById("user").innerHTML = "USER :" + user;
+			document.getElementById("computer").innerHTML = "COM :" + com;
+			++cnt;
+			document.getElementById("cnt").innerHTML = "TATAL GAME :" + cnt;
+			document.getElementById("win").innerHTML = "WIN COUNT :" + winCnt;
+			document.getElementById("GameImg").src = 'images/lose.jpg';
+			// alert("LOSE");
+		}
+	}
+
+	// After isGameWin() is call, This show result of game. 
+	function result(obj) {
+		var input = obj.value;
+		if (input == "홀") {
+			res = isGameWin(1);
+			show();
+		} else {
+			res = isGameWin(2);
+			show();
+		}
+	}
+
+	// isGameWin(USERNUM) 
+	function isGameWin(num) {
+		var rNum = Math.floor(Math.random() * 2) + 1; // 1,2
+		com = ar[rNum];		
+		user = ar[num];
+		console.log("rNum :" + ar[rNum] + "num : " + ar[num]);
+		if (rNum == num) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+</script>
+</head>
+<body>
+	<div id = "layout">
+		<div id="GameResultView">
+			<img id="GameImg" src="images/mainlogo.png" align="middle">
+		</div>
+		<div id="meun">
+			<fieldset>
+				<legend> OLD AND EVEN GAME </legend>
+				<div id="start">
+					<h4>게임을 시작합니다 !</h4>
+					<br>
+					<button type="button" onclick="menuLoding()">GAME START</button>
+					<br>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+</body>
+</html>

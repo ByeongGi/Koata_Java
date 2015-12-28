@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="./lib/mobile/jquery.mobile-1.4.5.min.css"/>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script src="./lib/jqurey/jquery-2.1.4.min.js"></script>
+    <script src="./lib/mobile/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="./lib/ui/min/jquery.ui.map.full.min.js"></script>
+    <script type="text/javascript" src="./lib/ui/jquery.ui.map.extensions.js"></script>
+    <script charset="utf-8" src="./lib/cordova/cordova.js"></script>
+    <script>
+            $(document).ready(function(){
+                var statrtLatLng =
+                 new google.maps.LatLng(37.402994, 127.108516);
+                $("#map_canvas").gmap({"center":statrtLatLng,"zoom":16});
+                // 현재 위치
+                $("#current_location").click(function(){
+                    $("#map_canvas").gmap("getCurrentPosition",function(position,status){
+                        if(status ==="OK"){
+                            var latlng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+                            var markerBlue = "./img/w1.PNG";
+                            $("#map_canvas").gmap("get","map").panTo(latlng);
+                           // $("#map_canvas").gmap("addMarker",{"position":latlng,"icon":markerBlue});
+                           var $marker = $("#map_canvas").gmap("addMarker",{"position":latlng,"icon":markerBlue});
+                           $marker.click(function(){
+                               $('#map_canvas').gmap('openInfoWindow', {'content': '>>ㅑ~~~~~!'}, this);
+                           });
+                        }else{
+                            alert('현재 위치를 찾을 수 없습니다.');
+                        }
+                    });
+                });
+            });
+
+    </script>
+
+</head>
+<body>
+<div data-role="page" id="page" class="map_style" data-fullscreen="true">
+    <div data-role="header">
+        <h1>KOSTA 위치</h1>
+    </div>
+    <div data-role="content" class="map_style">
+        <div id="map_canvas" class="map_style"></div>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <a href="#" data-icon="search" id="current_location">현재 위치 찾기</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

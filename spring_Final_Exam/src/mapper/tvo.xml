@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tvo">
+	<!-- 
+	NUM
+	SUB
+	WRITER
+	CONTENT
+	PWD
+	MFILE
+	 -->
+	<select id="selectList"  resultType="tvo" parameterType="java.util.HashMap">
+		SELECT * FROM (select rownum as rnum, Z.*
+			FROM(SELECT * FROM TVO
+			ORDER BY NUM DESC) Z
+			<![CDATA[
+			WHERE rownum <=#{record_end_no})
+		WHERE rnum >=#{record_Start_no}
+		]]>
+	</select>
+	
+	<insert id="insert" parameterType="tvo" >
+		INSERT INTO TVO 
+		VALUES(tvo_seq.nextVal, #{sub} , #{writer} ,
+		#{content} , #{pwd} , #{mfile}) 
+	</insert>
+	
+	<select id="selectOne" parameterType="int" resultType="tvo">
+		SELECT num , sub , writer , content , pwd , mfile 
+		FROM TVO WHERE NUM = #{num}
+	</select>
+	
+	<select id="select_Total_Cnt" resultType="int">
+		SELECT COUNT(*) FROM TVO
+	</select>
+	
+	
+	
+</mapper>
