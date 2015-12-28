@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Myand1210</string>
+     <string-array name="spnum">
+         <item>Start1</item>
+         <item>Start2</item>
+         <item>Start3</item>
+         <item>Start4</item>
+         <item>Start5</item>
+         <item>Start6</item>
+         <item>Start7</item>
+         <item>Start8</item>
+         <item>Start9</item>
+     </string-array>
+
+</resources>
